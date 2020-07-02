@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "experimentalDecorators": true,
+        "preserveConstEnums": true,
+        "outDir": "./build-transfer",
+        "lib": ["es2018", "esnext", "dom"],
+        "target": "es6",
+        "sourceMap": true
+    },
+    "include": ["src/common/**/*", "src/transfer/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts", "test"]
+}

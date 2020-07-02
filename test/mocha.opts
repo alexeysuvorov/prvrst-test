@@ -1,0 +1,6 @@
+--require ts-node/register/transpile-only
+--recursive
+--bail
+--exit
+--full-trace
+--timeout 10000

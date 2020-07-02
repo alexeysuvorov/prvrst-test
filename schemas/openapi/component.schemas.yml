@@ -1,0 +1,12 @@
+GenericJsonError:
+  type: object
+  required:
+    - message
+    - status
+  properties:
+    message:
+      description: Human-readable error description
+      type: string
+    status:
+      description: HTTP status of an error
+      type: integer

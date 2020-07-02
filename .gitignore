@@ -1,0 +1,8 @@
+/node_modules
+/dist
+.idea
+build
+build_migrations
+service-account.keys.json
+build-transfer
+service-account.keys.json

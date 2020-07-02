@@ -1,0 +1,124 @@
+UnauthorizedError:
+  description: Credentials are not provided or are invalid
+  content:
+    application/json:
+      schema:
+        allOf:
+          - $ref: "./component.schemas.yml#/GenericJsonError"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - auth/no-token
+                  - auth/invalid-token
+      example:
+        message: Token is required but not provided
+        status: 401
+        code: auth/no-token
+
+AccessDeniedError:
+  description: User have insufficient rights
+  content:
+    application/json:
+      schema:
+        allOf:
+          - $ref: "./component.schemas.yml#/GenericJsonError"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - auth/insufficient-rights
+      example:
+        message: User have insufficient rights
+        status: 403
+        code: auth/insufficient-rights
+
+NotModifedError:
+  description: The desired state has already been reached
+  content:
+    application/json:
+      schema:
+        allOf:
+          - $ref: "./component.schemas.yml#/GenericJsonError"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - common/not-updated
+      example:
+        message: Event eventId has already read for user userId
+        status: 409
+        code: common/not-updated
+
+ValidationError:
+  description: Unable to validate input parameters
+  content:
+    application/json:
+      schema:
+        allOf:
+          - $ref: "./component.schemas.yml#/GenericJsonError"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - api/invalid-query
+                  - api/invalid-request-body
+                  - api/invalid-response-body
+              errors:
+                description: Additional information about validation errors
+      example:
+        message: invalid query - ...
+        status: 422
+        code: api/invalid-query
+        errors: []
+
+NotFoundError:
+  description: Entity not found
+  content:
+    application/json:
+      schema:
+        allOf:
+          - $ref: "./component.schemas.yml#/GenericJsonError"
+          - type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - api/not-found
+                  - common/not-found
+              message:
+                type: string
+      example:
+        message: Requested route does not exist or is not specified
+        status: 404
+        code: api/not-found-or-described
+
+UnexpectedError:
+  description: Unexpected error happened
+  content:
+    application/json:
+      schema:
+        $ref: "./component.schemas.yml#/GenericJsonError"
+      example:
+        name: Unhandled server error
+        status: 500
+
+Success:
+  description: Operation executed succesfuly
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - success
+        properties:
+          success:
+            type: boolean
+          id:
+            type: string
+      example:
+        success: true

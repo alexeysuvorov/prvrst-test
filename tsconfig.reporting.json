@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "experimentalDecorators": true,
+        "preserveConstEnums": true,
+        "outDir": "./build-reporting",
+        "lib": ["es2018", "esnext", "dom"],
+        "target": "es2018",
+        "sourceMap": true
+    },
+    "include": ["src/common/**/*", "src/reporting/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts", "test"]
+}

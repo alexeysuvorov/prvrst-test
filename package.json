@@ -1,0 +1,49 @@
+{
+  "name": "ProvertTest",
+  "version": "1.0.0",
+  "description": "Hello )",
+  "scripts": {
+    "build": "rm -rf build/* && tsc --build ./tsconfig.json",
+    "build:all": "yarn build:reporting && yarn build:transfer",
+    "build:transfer": "rm -rf build-transfer/* && tsc --build ./tsconfig.transfer.json",
+    "build:reporting": "rm -rf build-reporting/* && tsc --build ./tsconfig.reporting.json",
+    "start:transfer": "node build-transfer/transfer",
+    "start:reporting": "node build-reporting/reporting",
+    "test": "NODE_ENV=test mocha 'test/**/*.ts'"
+  },
+  "main": "src/index.ts",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@apla/clickhouse": "^1.6.2",
+    "@types/gapi": "^0.0.39",
+    "@types/node": "^12.0.8",
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.5",
+    "colors": "^1.3.3",
+    "config": "^3.1.0",
+    "googleapis": "^52.1.0",
+    "js-yaml": "^3.13.1",
+    "mongodb": "^3.1.13",
+    "node-yaml": "^3.2.0",
+    "ts-node": "^8.1.1"
+  },
+  "devDependencies": {
+    "@fluffy-spoon/substitute": "^1.107.0",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/config": "^0.0.34",
+    "@types/mocha": "^5.2.6",
+    "@types/mongodb": "^3.1.21",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "i": "^0.3.6",
+    "mocha": "^6.1.4",
+    "npm": "^6.11.3",
+    "prettier": "^1.17.0",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.7.2"
+  }
+}

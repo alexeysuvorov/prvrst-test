@@ -1,0 +1,4 @@
+TotalCount:
+  schema:
+    description: Total amount of items in collection (pagination purposes)
+    type: integer

@@ -1,0 +1,17 @@
+Limit:
+  name: limit
+  in: query
+  description: Limits the number of returned results
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 30
+Skip:
+  name: skip
+  in: query
+  description: Set offset for returned results
+  schema:
+    type: integer
+    minimum: 0
+    default: 0
