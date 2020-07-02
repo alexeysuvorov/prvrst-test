@@ -1,6 +1,6 @@
 import * as config from "config"
 import * as ClickHouse from "@apla/clickhouse"
-import { initClickhouseConnection } from "../common/initClickhouseConnection"
+import { initClickhouseConnection } from "../common/connections/initClickhouseConnection"
 import { runService } from "./service"
 
 const colors = require('colors')

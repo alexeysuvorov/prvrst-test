@@ -11,12 +11,18 @@ export interface AnalyticsConfig {
     viewId: string
 }
 
+// No tests for this system since it is all about integration with third party product we don't control
+// and integration tests are not fit time frame I have for this test
 export class AnalyticsClient implements IAnalyticsClient {
     private readonly reportingInstance: Analyticsreporting
 
     public constructor(private readonly siteConfig: AnalyticsConfig) {
+        // there is no option to request recommended analyticsreporting_v4 with API key,
+        // so we have to use service account which requires us to have keyFile instead of
+        // a key in config
         const auth = new google.auth.GoogleAuth({
             // It is not secure to store keyfile in a SVC, but I want to make it simple for now
+            // Usually you use kubernetes secrets to provide sensitive info like this
             keyFile: path.join(__dirname, "../../service-account.keys.json"),
             scopes: "https://www.googleapis.com/auth/analytics",
         });

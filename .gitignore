@@ -6,3 +6,4 @@ build_migrations
 service-account.keys.json
 build-transfer
 service-account.keys.json
+test/fixtures/clickhouse/logs

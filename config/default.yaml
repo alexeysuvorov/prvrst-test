@@ -12,10 +12,10 @@ clickhouse:
     {
       "host": "localhost",
       "port": 8123,
-      "user": "test",
+      "user": "testu1",
       "password": "qwerty-321",
       "queryOptions": {
         "profile": "readwrite",
-        "database": "GA-reporting"
+        "database": "GA_Reporting"
       }
     }
