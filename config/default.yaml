@@ -3,6 +3,9 @@ app:
 
 environment: default
 
+ga:
+  viewId: "123808379"
+
 clickhouse:
   type: clickhouse
   credentials: >
