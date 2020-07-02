@@ -64,5 +64,4 @@ export async function migrate(db: ClickHouse, dir: string){
 
         writableStream.end()
     })
-
 }

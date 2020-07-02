@@ -1,8 +1,8 @@
 import * as ClickHouse from "@apla/clickhouse"
 import {ComponentsFactory} from "./componentsFactory"
-import { migrate as migrateClickHouse } from "../common/connections/ClickHouseMigrations"
+import {migrate as migrateClickHouse} from "../common/connections/ClickHouseMigrations"
 import * as path from "path"
-import {addDays} from "../common/utils"
+import {addDays, getUTCDateNoTime} from "../common/utils"
 
 export async function runService(db: ClickHouse, config: any) {
     // Usually migrations are supposed to run as separated short lived instance
@@ -12,9 +12,11 @@ export async function runService(db: ClickHouse, config: any) {
     const componentsFactory = new ComponentsFactory(db, config)
 
     const gaClient = componentsFactory.getAnalyticsClient()
-    const today = new Date()
+
+    const today = getUTCDateNoTime()
     const yesterday = addDays(today, -1)
     const usersCount = await gaClient.getUsersCount(yesterday, today)
 
-
+    const writer = componentsFactory.getStatsWriter()
+    await writer.writeUsersCountForDate(usersCount, today)
 }
