@@ -43,6 +43,6 @@ export class UsersStatsDataAccessor implements IUsersStatsDataAccessor {
             `
         const { data } = await this.db.querying(sql)
 
-        return data.map(x => x.countOfUsers).toArray()
+        return data.length === 0 ? [] : data.map(x => x.countOfUsers)
     }
 }

@@ -10,7 +10,7 @@ export function getUTCDateNoTime(date: Date = new Date()): Date {
 }
 
 export function dateToClickHouseYYYYMMDD(date: Date): number {
-    return date.getUTCDay() + 100 * date.getUTCMonth() + 10000 * date.getUTCFullYear()
+    return date.getUTCDate() + 100 * (date.getUTCMonth() + 1) + 10000 * date.getUTCFullYear()
 }
 
 export function daysBetween(StartDate, EndDate) {

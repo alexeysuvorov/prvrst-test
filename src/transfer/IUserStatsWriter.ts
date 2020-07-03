@@ -15,6 +15,7 @@ export class UserStatsWriter implements IUserStatsWriter{
             const writableStream = this.db.query(`INSERT INTO ${UserStatsWriter.tableName} FORMAT TSV`, (err) => {
                 if (err) {
                     reject(`Cannot write user stats: ${err}`)
+                    return
                 }
                 complete()
             })

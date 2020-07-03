@@ -54,6 +54,7 @@ export async function migrate(db: ClickHouse, dir: string){
         const writableStream = db.query(`INSERT INTO ${tableName} FORMAT TSV`, (err) => {
             if (err) {
                 reject(`Cannot save executed migrations: ${err}`)
+                return
             }
             complete()
         })
