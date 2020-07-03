@@ -25,7 +25,7 @@ export async function runReportingService(db: ClickHouse, config: any) {
         uiEndpoint: '/doc',
     }))
 
-    const cp = new ComponentsFactory(db, config)
+    const cp = new ComponentsFactory(db)
     
     await buildCommonRoutes(router)
     await buildUserStatsRoutes(router, cp)
