@@ -9,6 +9,18 @@ import {UsersStatsDataAccessor} from "../../src/reporting/IUsersStatsDataAccesso
 const db = initClickhouseConnection(config)
 
 describe("User stats data accessor", async () => {
+    beforeEach(async () => {
+        await new Promise((complete, reject) => {
+            db.query("ALTER TABLE CountOfUsersByDate DELETE WHERE 1=1", () => {
+                complete()
+            })
+        })
+        // required to give DB time for cleanup
+        return new Promise((resolve) => {
+            setTimeout(resolve, 500);
+        });
+    })
+
     it("Should return users stats for date range", async () => {
         const date = getUTCDateNoTime()
         const dateFrom = addDays(date, -10)
@@ -32,8 +44,6 @@ describe("User stats data accessor", async () => {
 
         const component = new UsersStatsDataAccessor(db)
         const res = await component.getUsersCountByDateRange(dateFrom, date)
-
-        await db.querying("ALTER TABLE CountOfUsersByDate DELETE WHERE 1=1")
 
         expect(res.length).eq(10)
         expect(res).eql([19,18,17,16,15,14,13,12,11,10])
@@ -62,7 +72,6 @@ describe("User stats data accessor", async () => {
 
         const component = new UsersStatsDataAccessor(db)
         const res = await component.getMediaForDateRange(dateFrom, date)
-        await db.querying("ALTER TABLE CountOfUsersByDate DELETE WHERE 1=1")
 
         expect(res).eql(15)
     })

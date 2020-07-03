@@ -39,7 +39,11 @@ docker-compose up
 Terminal 2:
 
 ``
-yarn start
+yarn build:reporting && yarn start:reporting
+``
+or
+``
+yarn build:transfer && yarn start:transfer
 ``
 
 **Test project**
