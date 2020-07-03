@@ -1,5 +1,4 @@
 import * as ClickHouse from "@apla/clickhouse"
-import stringify = require("csv-stringify")
 import {ALIASES, encodeRow} from "../common/utils"
 
 export interface IUserStatsWriter {
@@ -7,12 +6,13 @@ export interface IUserStatsWriter {
 }
 
 export class UserStatsWriter implements IUserStatsWriter{
-    private readonly tableName = "CountOfUsersByDate"
+    private static readonly tableName = "CountOfUsersByDate"
+
     constructor(private readonly db: ClickHouse) { }
 
     public async writeUsersCountForDate(count: number, date: Date): Promise<any> {
         return new Promise((complete, reject) => {
-            const writableStream = this.db.query("INSERT INTO CountOfUsersByDate FORMAT TSV", (err) => {
+            const writableStream = this.db.query(`INSERT INTO ${UserStatsWriter.tableName} FORMAT TSV`, (err) => {
                 if (err) {
                     reject(`Cannot write user stats: ${err}`)
                 }

@@ -8,18 +8,19 @@ import {getUTCDateNoTime} from "../../src/common/utils"
 const db = initClickhouseConnection(config)
 
 describe("User stats writer", async () => {
-    beforeEach(async () => {
-        await db.querying("ALTER TABLE CountOfUsersByDate DELETE WHERE 1=1")
-    })
-
+    // requirements for multiple run on the same date is not specified, so I don't test duplicates and etc.
     it("Should successfully write", async () => {
         const component = new UserStatsWriter(db)
         const date = getUTCDateNoTime()
 
         await component.writeUsersCountForDate(100500, date)
 
-        const { data } = await db.querying("select countOfUsers, today from CountOfUsersByDate")
+        const { data } = await db.querying("SELECT countOfUsers, toUInt64(today) as today FROM CountOfUsersByDate")
+
+        await db.querying("ALTER TABLE CountOfUsersByDate DELETE WHERE 1=1")
+
         expect(data.length).eq(1)
-        expect(data[0]).eql({ countOfUsers: 100500, today: '2020-07-02 00:00:00' })
+        expect(data[0].countOfUsers).eq(100500)
+        expect(parseInt(data[0].today)).eq(date.getTime() / 1000)
     })
 })
