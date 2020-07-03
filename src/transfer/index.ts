@@ -1,7 +1,7 @@
 import * as config from "config"
 import * as ClickHouse from "@apla/clickhouse"
 import { initClickhouseConnection } from "../common/connections/initClickhouseConnection"
-import { runService } from "./service"
+import { runTransferService } from "./service"
 
 const colors = require('colors')
 
@@ -18,7 +18,7 @@ process.on("unhandledRejection", unhandledRejection)
 
 const clickHouse: ClickHouse = initClickhouseConnection(config)
 
-runService(clickHouse, config)
+runTransferService(clickHouse, config)
     .then( () => {
       console.log("Transfer completed")
       process.exit(0)

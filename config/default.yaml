@@ -3,6 +3,9 @@ app:
 
 environment: default
 
+reporting_server:
+  port: 8080
+
 ga:
   viewId: "123808379"
 

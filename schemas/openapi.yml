@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: User stats reporting service api
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Debug server
+
+paths:
+  /:
+    get:
+      summary: Get service status
+      description: Resturs service version and status
+      responses:
+        200:
+          description: Setvice status
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /stats:
+    get:
+      summary: Get user stats for today
+      description: Get user stats summary report data
+      responses:
+        200:
+          description: Client web site config
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - todayUsers
+                  - growthInPercent
+                  - medianForLastSevenDays
+                properties:
+                  todayUsers:
+                    type: integer
+                  growthInPercent:
+                    type: number
+                    format: float
+                  medianForLastSevenDays:
+                    type: number
+                    format: float
+
+        404:
+          $ref: "#/components/responses/NotFoundError"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        422:
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+
+components:
+  securitySchemes:
+    $ref: ./openapi/component.securitySchemes.yml
+  responses:
+    $ref: ./openapi/component.responses.yml
+  parameters:
+    $ref: ./openapi/component.parameters.yml
+  headers:
+    $ref: ./openapi/component.headers.yml
